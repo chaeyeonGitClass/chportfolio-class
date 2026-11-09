@@ -8,6 +8,7 @@ const modalDescription = document.querySelector("#modal-description");
 const modalRole = document.querySelector("#modal-role");
 const modalTechnologies = document.querySelector("#modal-technologies");
 const modalResults = document.querySelector("#modal-results");
+const contactForm = document.querySelector("#contact-form");
 let lastFocusedProject = null;
 
 const projectDetails = {
@@ -114,6 +115,77 @@ function keepFocusInsideModal(event) {
 
 if (currentYear) {
   currentYear.textContent = String(new Date().getFullYear());
+}
+
+if (contactForm instanceof HTMLFormElement) {
+  const formFields = [
+    {
+      input: contactForm.querySelector("#contact-name"),
+      error: contactForm.querySelector("#contact-name-error"),
+      requiredMessage: "Please enter your name.",
+    },
+    {
+      input: contactForm.querySelector("#contact-email"),
+      error: contactForm.querySelector("#contact-email-error"),
+      requiredMessage: "Please enter your email address.",
+    },
+    {
+      input: contactForm.querySelector("#contact-message"),
+      error: contactForm.querySelector("#contact-message-error"),
+      requiredMessage: "Please enter a message.",
+    },
+  ];
+  const feedback = contactForm.querySelector("#contact-form-feedback");
+
+  if (formFields.every(({ input, error }) => input instanceof HTMLElement && error instanceof HTMLElement) &&
+      feedback instanceof HTMLElement) {
+    contactForm.addEventListener("input", () => {
+      feedback.textContent = "";
+    });
+
+    contactForm.addEventListener("submit", (event) => {
+      event.preventDefault();
+      let firstInvalidField = null;
+
+      formFields.forEach(({ input, error, requiredMessage }) => {
+        if (!(input instanceof HTMLInputElement || input instanceof HTMLTextAreaElement) ||
+            !(error instanceof HTMLElement)) {
+          return;
+        }
+
+        const value = input.value.trim();
+        let errorMessage = value ? "" : requiredMessage;
+        if (input instanceof HTMLInputElement && input.type === "email" && value) {
+          const [localPart, domain] = value.split("@");
+          const hasValidEmailFormat =
+            !input.validity.typeMismatch &&
+            Boolean(domain?.includes(".")) &&
+            !localPart.startsWith(".") &&
+            !localPart.endsWith(".") &&
+            !localPart.includes("..");
+          if (!hasValidEmailFormat) {
+            errorMessage = "Please enter a valid email address.";
+          }
+        }
+
+        error.textContent = errorMessage;
+        input.setAttribute("aria-invalid", String(Boolean(errorMessage)));
+        if (errorMessage && firstInvalidField === null) {
+          firstInvalidField = input;
+        }
+      });
+
+      if (firstInvalidField instanceof HTMLElement) {
+        feedback.textContent = "";
+        firstInvalidField.focus();
+        return;
+      }
+
+      feedback.textContent = "Your details look good. This demo does not send emails.";
+    });
+  } else {
+    console.error("The contact form could not be initialized because a field is missing.");
+  }
 }
 
 if (menuToggle && siteNav) {
