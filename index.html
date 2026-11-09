@@ -221,6 +221,47 @@
         <a class="button button-light" href="mailto:hello@yourname.dev">
           hello@yourname.dev <span aria-hidden="true">↗</span>
         </a>
+        <form class="contact-form" id="contact-form" novalidate>
+          <div class="contact-form-fields">
+            <div class="form-field">
+              <label for="contact-name">Name</label>
+              <input
+                id="contact-name"
+                name="name"
+                type="text"
+                autocomplete="name"
+                required
+                aria-describedby="contact-name-error"
+              />
+              <p class="form-error" id="contact-name-error"></p>
+            </div>
+            <div class="form-field">
+              <label for="contact-email">Email</label>
+              <input
+                id="contact-email"
+                name="email"
+                type="email"
+                autocomplete="email"
+                required
+                aria-describedby="contact-email-error"
+              />
+              <p class="form-error" id="contact-email-error"></p>
+            </div>
+            <div class="form-field form-field-message">
+              <label for="contact-message">Message</label>
+              <textarea
+                id="contact-message"
+                name="message"
+                rows="5"
+                required
+                aria-describedby="contact-message-error"
+              ></textarea>
+              <p class="form-error" id="contact-message-error"></p>
+            </div>
+          </div>
+          <button class="button button-light contact-submit" type="submit">Submit</button>
+          <p class="form-feedback" id="contact-form-feedback" role="status" aria-live="polite"></p>
+        </form>
         <div class="contact-bottom">
           <span>BASED ON EARTH · WORKING EVERYWHERE</span>
           <a href="#home">BACK TO TOP ↑</a>
