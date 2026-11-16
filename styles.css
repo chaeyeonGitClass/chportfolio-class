@@ -5,10 +5,57 @@
   --paper: #f7f8f4;
   --green: #c8ef75;
   --line: #e2e6de;
+  --surface: #eef1ea;
+  --soft-border: #e0e5dc;
+  --soft-ink: #505d53;
+  --control-border: #d6dcd2;
+  --card-border: #d7ddd2;
+  --meta-border: #dce1d8;
+  --modal-border: #dfe3dd;
+  --modal-heading: #304258;
+  --modal-copy: #3d4b5c;
+  --warm-accent: #756a55;
+  --button-hover: #34443a;
+  --contact-panel: #26352c;
+  --contact-secondary: #c0c9c1;
+  --contact-input-border: #ffffff3d;
+  --contact-input-background: #ffffff0d;
+  --contact-input-text: #f7f8f4;
+  --contact-label: #e2e8de;
+  --contact-feedback: #dce4ef;
+  --contact-bottom-border: #ffffff24;
   --display: "Space Grotesk", sans-serif;
   --cursive: "Caveat", cursive;
   --body: "Caveat", cursive;
   --text-gradient: linear-gradient(110deg, #304258 0%, #4d5b70 58%, #756a55 100%);
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --ink: #e8eee8;
+  --muted: #aab5ac;
+  --paper: #171e1a;
+  --line: #354039;
+  --surface: #202923;
+  --soft-border: #3a473d;
+  --soft-ink: #c1ccc2;
+  --control-border: #425047;
+  --card-border: #425047;
+  --meta-border: #39453d;
+  --modal-border: #3a473d;
+  --modal-heading: #dce7ed;
+  --modal-copy: #d0dad2;
+  --warm-accent: #d5c59f;
+  --button-hover: #d8f6a0;
+  --contact-panel: #222d26;
+  --contact-secondary: #c8d2ca;
+  --contact-input-border: #526359;
+  --contact-input-background: #ffffff08;
+  --contact-input-text: #e8eee8;
+  --contact-label: #e5eee5;
+  --contact-feedback: #dce7ed;
+  --contact-bottom-border: #ffffff30;
+  --text-gradient: linear-gradient(110deg, #dce7ed 0%, #c2d0d7 58%, #d5c59f 100%);
 }
 
 * {
@@ -93,8 +140,38 @@ a {
 }
 
 .wordmark span {
-  color: #756a55;
-  -webkit-text-fill-color: #756a55;
+  color: var(--warm-accent);
+  -webkit-text-fill-color: var(--warm-accent);
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.theme-toggle {
+  width: 42px;
+  height: 42px;
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--control-border);
+  border-radius: 50%;
+  background: transparent;
+  color: var(--ink);
+  font: 20px/1 var(--display);
+  cursor: pointer;
+  transition: background 180ms ease, border-color 180ms ease, transform 180ms ease;
+}
+
+.theme-toggle:hover {
+  transform: translateY(-2px);
+  background: var(--surface);
+}
+
+.theme-toggle:focus-visible {
+  outline: 3px solid #71819a;
+  outline-offset: 3px;
 }
 
 .site-nav {
@@ -119,7 +196,7 @@ a {
 
 .site-nav .nav-contact {
   padding: 12px 17px;
-  border: 1px solid #d6dcd2;
+  border: 1px solid var(--control-border);
   border-radius: 999px;
 }
 
@@ -213,8 +290,8 @@ p {
 }
 
 .work-heading h2 span {
-  color: #756a55;
-  -webkit-text-fill-color: #756a55;
+  color: var(--warm-accent);
+  -webkit-text-fill-color: var(--warm-accent);
 }
 
 .hero-intro {
@@ -253,11 +330,11 @@ p {
 
 .button-dark {
   background: var(--ink);
-  color: white;
+  color: var(--paper);
 }
 
 .button-dark:hover {
-  background: #34443a;
+  background: var(--button-hover);
 }
 
 .hero-art {
@@ -391,15 +468,15 @@ p {
 
 .skill-list span {
   padding: 9px 12px;
-  border: 1px solid #e0e5dc;
+  border: 1px solid var(--soft-border);
   border-radius: 999px;
-  color: #505d53;
+  color: var(--soft-ink);
   font-size: 16px;
 }
 
 .work-section {
   padding-block: 91px 104px;
-  background: #eef1ea;
+  background: var(--surface);
 }
 
 .work-heading {
@@ -738,21 +815,21 @@ p {
   display: grid;
   flex: 0 0 auto;
   place-items: center;
-  border: 1px solid #d7ddd2;
+  border: 1px solid var(--card-border);
   border-radius: 50%;
   transition: background 180ms ease, color 180ms ease;
 }
 
 .project-link:hover .project-arrow {
   background: var(--ink);
-  color: white;
+  color: var(--paper);
 }
 
 .project-meta {
   display: flex;
   justify-content: space-between;
   padding-top: 12px;
-  border-top: 1px solid #dce1d8;
+  border-top: 1px solid var(--meta-border);
   color: #70796f;
   font-size: 13px;
   font-weight: 600;
@@ -765,7 +842,7 @@ p {
   max-height: min(82vh, 760px);
   padding: 0;
   overflow: auto;
-  border: 1px solid #dfe3dd;
+  border: 1px solid var(--modal-border);
   border-radius: 12px;
   background: var(--paper);
   color: var(--ink);
@@ -792,8 +869,8 @@ p {
   place-items: center;
   border: 1px solid var(--line);
   border-radius: 50%;
-  background: #fff;
-  color: #304258;
+  background: var(--surface);
+  color: var(--modal-heading);
   font: 28px/1 var(--body);
   cursor: pointer;
 }
@@ -805,7 +882,7 @@ p {
 
 .project-modal h2 {
   margin-bottom: 8px;
-  color: #304258;
+  color: var(--modal-heading);
   font-family: var(--cursive);
   font-size: clamp(38px, 7vw, 54px);
   font-weight: 600;
@@ -814,7 +891,7 @@ p {
 
 .modal-notice {
   margin-bottom: 23px;
-  color: #68716a;
+  color: var(--muted);
   font-size: 15px;
   line-height: 1.5;
 }
@@ -822,7 +899,7 @@ p {
 .modal-description,
 .modal-detail p,
 .modal-detail li {
-  color: #3d4b5c;
+  color: var(--modal-copy);
   font-size: 19px;
   line-height: 1.55;
 }
@@ -841,7 +918,7 @@ p {
 
 .modal-detail h3 {
   margin-bottom: 8px;
-  color: #756a55;
+  color: var(--warm-accent);
   font-family: var(--display);
   font-size: 13px;
   font-weight: 600;
@@ -871,7 +948,7 @@ p {
   margin-bottom: 83px;
   padding: 75px 8% 35px;
   border-radius: 8px;
-  background: #26352c;
+  background: var(--contact-panel);
   color: #f7f8f4;
   text-align: center;
 }
@@ -905,7 +982,7 @@ p {
   z-index: 1;
   max-width: 390px;
   margin: 20px auto 23px;
-  color: #c0c9c1;
+  color: var(--contact-secondary);
   font-size: 20px;
   line-height: 1.55;
 }
@@ -941,7 +1018,7 @@ p {
 }
 
 .form-field label {
-  color: #e2e8de;
+  color: var(--contact-label);
   font-size: 15px;
   font-weight: 600;
 }
@@ -951,10 +1028,10 @@ p {
   width: 100%;
   min-height: 48px;
   padding: 12px 14px;
-  border: 1px solid #ffffff3d;
+  border: 1px solid var(--contact-input-border);
   border-radius: 6px;
-  background: #ffffff0d;
-  color: #f7f8f4;
+  background: var(--contact-input-background);
+  color: var(--contact-input-text);
   font: inherit;
   font-size: 16px;
 }
@@ -997,7 +1074,7 @@ p {
 .form-feedback {
   min-height: 1.5em;
   margin: 15px 0 0;
-  color: #dce4ef;
+  color: var(--contact-feedback);
   font-size: 16px;
 }
 
@@ -1015,8 +1092,8 @@ p {
   justify-content: space-between;
   margin-top: 76px;
   padding-top: 17px;
-  border-top: 1px solid #ffffff24;
-  color: #c0c9c1;
+  border-top: 1px solid var(--contact-bottom-border);
+  color: var(--contact-secondary);
   font-size: 13px;
   font-weight: 600;
   letter-spacing: 1px;
@@ -1063,6 +1140,11 @@ p {
     border-radius: 50%;
     background: transparent;
     cursor: pointer;
+  }
+
+  .theme-toggle {
+    width: 42px;
+    height: 42px;
   }
 
   .menu-toggle span {

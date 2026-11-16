@@ -9,7 +9,50 @@ const modalRole = document.querySelector("#modal-role");
 const modalTechnologies = document.querySelector("#modal-technologies");
 const modalResults = document.querySelector("#modal-results");
 const contactForm = document.querySelector("#contact-form");
+const themeToggle = document.querySelector("#theme-toggle");
+const themeColor = document.querySelector('meta[name="theme-color"]');
 let lastFocusedProject = null;
+
+function getStoredTheme() {
+  try {
+    return localStorage.getItem("portfolio-theme") === "dark" ? "dark" : "light";
+  } catch (error) {
+    console.error("The saved color theme could not be loaded.", error);
+    return "light";
+  }
+}
+
+function setTheme(theme, save = false) {
+  document.documentElement.dataset.theme = theme;
+  const label = theme === "dark" ? "Switch to light mode" : "Switch to dark mode";
+
+  if (themeToggle) {
+    themeToggle.setAttribute("aria-label", label);
+    themeToggle.setAttribute("title", label);
+    themeToggle.firstElementChild.textContent = theme === "dark" ? "☀" : "☾";
+  }
+
+  if (themeColor) {
+    themeColor.content = theme === "dark" ? "#171e1a" : "#f7f8f4";
+  }
+
+  if (save) {
+    try {
+      localStorage.setItem("portfolio-theme", theme);
+    } catch (error) {
+      console.error("The selected color theme could not be saved.", error);
+    }
+  }
+}
+
+setTheme(getStoredTheme());
+
+if (themeToggle) {
+  themeToggle.addEventListener("click", () => {
+    const nextTheme = document.documentElement.dataset.theme === "dark" ? "light" : "dark";
+    setTheme(nextTheme, true);
+  });
+}
 
 const projectDetails = {
   develop: {
